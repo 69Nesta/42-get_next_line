@@ -3,3 +3,8 @@
 *.out
 *.a
 *.o
+
+main.c
+test.c
+gnl.out
+test*.txt
