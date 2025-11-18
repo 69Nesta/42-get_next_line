@@ -6,7 +6,7 @@
 /*   By: rpetit <rpetit@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 08:42:59 by rpetit            #+#    #+#             */
-/*   Updated: 2025/11/18 13:53:07 by rpetit           ###   ########.fr       */
+/*   Updated: 2025/11/18 16:17:47 by rpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 char	*get_next_line(int fd);
 
 /* Utils */
-// static size_t	ft_strlen_nl(const char *str);
+size_t	ft_strlen_nl(const char *str, size_t size);
 
 #endif
