@@ -6,7 +6,7 @@
 /*   By: rpetit <rpetit@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 08:37:44 by rpetit            #+#    #+#             */
-/*   Updated: 2025/11/19 17:34:08 by rpetit           ###   ########.fr       */
+/*   Updated: 2025/11/19 17:45:09 by rpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		ft_processes(t_gnl *gnl, char **line, size_t *line_size,
 
 char	*get_next_line(int fd)
 {
-	static t_gnl	gnl[FD_COUNT] = {0};
+	static t_gnl	gnl[FD_MAX] = {0};
 	char			*line;
 	size_t			line_size;
 	int				stop;
@@ -26,7 +26,7 @@ char	*get_next_line(int fd)
 	stop = 0;
 	line = NULL;
 	line_size = 0;
-	if (fd < 0)
+	if (fd < 0 || fd >= FD_MAX)
 		return (NULL);
 	while (!stop)
 	{
