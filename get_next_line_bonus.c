@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpetit <rpetit@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 08:37:44 by rpetit            #+#    #+#             */
-/*   Updated: 2025/11/19 17:07:38 by rpetit           ###   ########.fr       */
+/*   Updated: 2025/11/19 17:34:08 by rpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "get_next_line_bonus.h"
 
 static void		ft_read(int fd, t_gnl *gnl, char **line, int *stop);
 static void		ft_processes(t_gnl *gnl, char **line, size_t *line_size,
@@ -19,7 +18,7 @@ static void		ft_processes(t_gnl *gnl, char **line, size_t *line_size,
 
 char	*get_next_line(int fd)
 {
-	static t_gnl	gnl = {.buffer = "", .buffer_index = 0, .bytes_read = 0};
+	static t_gnl	gnl[FD_COUNT] = {0};
 	char			*line;
 	size_t			line_size;
 	int				stop;
@@ -27,11 +26,13 @@ char	*get_next_line(int fd)
 	stop = 0;
 	line = NULL;
 	line_size = 0;
+	if (fd < 0)
+		return (NULL);
 	while (!stop)
 	{
-		ft_read(fd, &gnl, &line, &stop);
+		ft_read(fd, &(gnl[fd]), &line, &stop);
 		if (!stop)
-			ft_processes(&gnl, &line, &line_size, &stop);
+			ft_processes(&(gnl[fd]), &line, &line_size, &stop);
 	}
 	return (line);
 }
