@@ -8,3 +8,4 @@ main.c
 test.c
 gnl.out
 test*.txt
+tests
