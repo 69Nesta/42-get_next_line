@@ -6,7 +6,7 @@
 /*   By: rpetit <rpetit@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 08:44:55 by rpetit            #+#    #+#             */
-/*   Updated: 2025/11/19 13:06:25 by rpetit           ###   ########.fr       */
+/*   Updated: 2025/11/19 17:06:17 by rpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,58 @@ size_t	ft_strlen_nl(const char *str, size_t size)
 	while (i < size && str[i] && str[i] != '\n')
 		i++;
 	return (i);
+}
+
+size_t	ft_fill_line(char *line, char *buffer, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (!line && size > 0)
+		return (0);
+	while (i < size)
+	{
+		line[i] = buffer[i];
+		i++;
+	}
+	if (buffer[size] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
+	return (i + (buffer[size] == '\n'));
+}
+
+char	*ft_realloc(char *src, size_t size, size_t add_size)
+{
+	size_t	i;
+	char	*new_src;
+
+	i = 0;
+	new_src = malloc(sizeof(char) * (size + add_size + 1));
+	if (!new_src)
+	{
+		free(src);
+		return (NULL);
+	}
+	while (i < size)
+	{
+		new_src[i] = src[i];
+		i++;
+	}
+	if (size > 0)
+		free(src);
+	new_src[i] = '\0';
+	return (new_src);
+}
+
+void	ft_stop(int *stop)
+{
+	*stop = 1;
+}
+
+void	ft_free_on_fail(char **line, int *stop)
+{
+	if (*line)
+		free(*line);
+	*line = NULL;
+	*stop = 1;
 }
