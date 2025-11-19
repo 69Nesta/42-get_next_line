@@ -6,12 +6,11 @@
 /*   By: rpetit <rpetit@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 08:37:44 by rpetit            #+#    #+#             */
-/*   Updated: 2025/11/19 17:07:38 by rpetit           ###   ########.fr       */
+/*   Updated: 2025/11/19 17:24:51 by rpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static void		ft_read(int fd, t_gnl *gnl, char **line, int *stop);
 static void		ft_processes(t_gnl *gnl, char **line, size_t *line_size,
