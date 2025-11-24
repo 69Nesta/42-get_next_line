@@ -6,15 +6,14 @@
 /*   By: rpetit <rpetit@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 08:37:44 by rpetit            #+#    #+#             */
-/*   Updated: 2025/11/19 17:45:09 by rpetit           ###   ########.fr       */
+/*   Updated: 2025/11/24 15:24:19 by rpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static void		ft_read(int fd, t_gnl *gnl, char **line, int *stop);
-static void		ft_processes(t_gnl *gnl, char **line, size_t *line_size,
-					int *stop);
+void	ft_read(int fd, t_gnl *gnl, char **line, int *stop);
+void	ft_processes(t_gnl *gnl, char **line, size_t *line_size, int *stop);
 
 char	*get_next_line(int fd)
 {
@@ -37,7 +36,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-static void	ft_read(int fd, t_gnl *gnl, char **line, int *stop)
+void	ft_read(int fd, t_gnl *gnl, char **line, int *stop)
 {
 	if (gnl->buffer_index >= gnl->bytes_read)
 	{
@@ -58,7 +57,7 @@ static void	ft_read(int fd, t_gnl *gnl, char **line, int *stop)
 	}
 }
 
-static void	ft_processes(t_gnl *gnl, char **line, size_t *line_size, int *stop)
+void	ft_processes(t_gnl *gnl, char **line, size_t *line_size, int *stop)
 {
 	size_t	len_to_nl;
 

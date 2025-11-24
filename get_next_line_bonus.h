@@ -6,7 +6,7 @@
 /*   By: rpetit <rpetit@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 08:42:59 by rpetit            #+#    #+#             */
-/*   Updated: 2025/11/19 17:54:20 by rpetit           ###   ########.fr       */
+/*   Updated: 2025/11/24 15:21:28 by rpetit           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 100
 # endif
 # ifndef FD_MAX
-#  define FD_MAX 1010
+#  define FD_MAX 128
 # endif
 
 # include <unistd.h>
