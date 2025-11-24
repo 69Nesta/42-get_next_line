@@ -9,3 +9,6 @@ test.c
 gnl.out
 test*.txt
 tests
+
+run_bonus.sh
+main_bonus.c
