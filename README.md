@@ -7,7 +7,6 @@
 This project implements a C function `get_next_line` that reads and returns the next line from a file descriptor, handling arbitrary line lengths and partial reads. It provides a single-FD implementation ([get_next_line.c](get_next_line.c)) and a multi-FD (bonus) implementation ([get_next_line_bonus.c](get_next_line_bonus.c)) that maintains independent state per file descriptor.
 
 Key source files:
-- [`get_next_line`](get_next_line.c)
 - [`get_next_line.c`](get_next_line.c)
 - [`get_next_line_utils.c`](get_next_line_utils.c) (helpers: [`ft_realloc`](get_next_line_utils.c), [`ft_fill_line`](get_next_line_utils.c), [`ft_strlen_nl`](get_next_line_utils.c))
 - Bonus: [`get_next_line_bonus.c`](get_next_line_bonus.c), [`get_next_line_utils_bonus.c`](get_next_line_utils_bonus.c)
@@ -16,28 +15,46 @@ Key source files:
 
 ## Instructions
 
-### Compile the basic version:
+This repository provides the get_next_line implementation as a library (no *main()* is included). To use it, compile the source files into object files or a static library and link them into your program.
+
+
+### Example: compile object files and link directly
 
 ```sh
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=100 get_next_line.c get_next_line_utils.c main.c -o gnl.out
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=100 -c get_next_line.c get_next_line_utils.c
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=100 main.c get_next_line.o get_next_line_utils.o -o my_program
 ```
 
-### Compile the bonus (multi-FD) version:
+
+### Example: create a static library and link
 
 ```sh
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=100 -D FD_MAX=128 get_next_line_bonus.c get_next_line_utils_bonus.c main.c -o gnl_bonus.out
+# build object files
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=100 -c get_next_line.c get_next_line_utils.c
+# create static library
+ar rcs libgnl.a get_next_line.o get_next_line_utils.o
+# compile your program and link the library
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=100 main.c -L. -lgnl -o my_program
 ```
 
-### Run:
+
+### Bonus (multi-FD) build
+
 ```sh
-./gnl.out path/to/file.txt
-# or for bonus
-./gnl_bonus.out path/to/file.txt
+# object + link
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=100 -D FD_MAX=128 -c get_next_line_bonus.c get_next_line_utils_bonus.c
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=100 -D FD_MAX=128 main.c get_next_line_bonus.o get_next_line_utils_bonus.o -o my_program_bonus
+
+# or static library
+ar rcs libgnl_bonus.a get_next_line_bonus.o get_next_line_utils_bonus.o
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=100 -D FD_MAX=128 main.c -L. -lgnl_bonus -o my_program_bonus
 ```
 
-Adjust `BUFFER_SIZE` at compile time with `-D BUFFER_SIZE=<n>` to test different buffer sizes. 
 
-Optional: you may also adjust `FD_MAX` for the bonus build with `-D FD_MAX=<n>` to change the maximum number of tracked file descriptors. These adjustments are optional and intended for testing different scenarios (large/small buffers, more FDs).
+#### Notes
+
+- Adjust `BUFFER_SIZE` at compile time with `-D BUFFER_SIZE=<n>` to test different buffer sizes.
+- For the bonus variant, adjust `FD_MAX` with `-D FD_MAX=<n>` when compiling.
 
 
 ## Algorithm and implementation details
@@ -84,11 +101,5 @@ The implementation reads from the file descriptor in chunks of size `BUFFER_SIZE
 
 AI assistance (GitHub Copilot) was used to help draft the README text.
 
-
-## Files of interest
-- [`get_next_line.c`](get_next_line.c)
-- [`get_next_line_utils.c`](get_next_line_utils.c)
-- [`get_next_line.h`](get_next_line.h)
-- [`get_next_line_bonus.c`](get_next_line_bonus.c)
-- [`get_next_line_utils_bonus.c`](get_next_line_utils_bonus.c)
-- [`get_next_line_bonus.h`](get_next_line_utils.h)
+## Author
+- [@69Nesta](https://github.com/69Nesta)
