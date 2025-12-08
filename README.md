@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by rpetit.*
+*This project has been created as part of the 42 curriculum by [rpetit](https://profile.intra.42.fr/users/rpetit).*
 
 # get_next_line
 
